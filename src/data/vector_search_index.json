@@ -1,0 +1,66 @@
+{
+    "fields": [
+        {
+            "type": "vector",
+            "path": "embedding",
+            "numDimensions": 1536,
+            "similarity": "cosine"
+        },
+        {
+            "type": "filter",
+            "path": "metadata.category"
+        },
+        {
+            "type": "filter",
+            "path": "metadata.priority"
+        },
+        {
+            "type": "filter",
+            "path": "metadata.status"
+        },
+        {
+            "type": "filter",
+            "path": "metadata.tags"
+        },
+        {
+            "type": "filter",
+            "path": "metadata.source"
+        },
+        {
+            "type": "filter",
+            "path": "metadata.team"
+        },
+        {
+            "type": "filter",
+            "path": "metadata.sprint"
+        },
+        {
+            "type": "filter",
+            "path": "metadata.epic"
+        },
+        {
+            "type": "filter",
+            "path": "metadata.assignee"
+        },
+        {
+            "type": "filter",
+            "path": "metadata.createdDate"
+        },
+        {
+            "type": "filter",
+            "path": "metadata.updatedDate"
+        },
+        {
+            "type": "filter",
+            "path": "metadata.storyPoints"
+        },
+        {
+            "type": "filter",
+            "path": "metadata.module"
+        },
+        {
+            "type": "filter",
+            "path": "metadata.isActive"
+        }
+    ]
+}

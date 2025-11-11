@@ -1,0 +1,106 @@
+{
+    "mappings": {
+        "dynamic": false,
+        "fields": {
+            "key": {
+                "type": "string",
+                "analyzer": "lucene.standard"
+            },
+            "summary": {
+                "type": "string",
+                "analyzer": "lucene.standard"
+            },
+            "description": {
+                "type": "string",
+                "analyzer": "lucene.standard"
+            },
+            "acceptanceCriteria": {
+                "type": "string",
+                "analyzer": "lucene.standard"
+            },
+            "businessValue": {
+                "type": "string",
+                "analyzer": "lucene.standard"
+            },
+            "dependencies": {
+                "type": "string",
+                "analyzer": "lucene.standard"
+            },
+            "notes": {
+                "type": "string",
+                "analyzer": "lucene.standard"
+            },
+            "status.name": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+            },
+            "status.category": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+            },
+            "priority.name": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+            },
+            "project": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+            },
+            "epic": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+            },
+            "risk": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+            },
+            "sourceType": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+            },
+            "assignee.displayName": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+            },
+            "reporter.displayName": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+            },
+            "components": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+            },
+            "labels": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+            },
+            "fixVersions": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+            },
+            "team": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+            },
+            "sprint": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+            },
+            "created": {
+                "type": "date"
+            },
+            "updated": {
+                "type": "date"
+            },
+            "importedAt": {
+                "type": "date"
+            },
+            "storyPoints": {
+                "type": "number"
+            },
+            "originalRowIndex": {
+                "type": "number"
+            }
+        }
+    }
+}
