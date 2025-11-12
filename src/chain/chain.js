@@ -104,11 +104,23 @@ async function groq() {
 
     // Step 1: Define the new user story to validate
     const newStory = `
-    Key: HC-NEW-001
-    Summary: Nurse Activities Raise Request
-    Description: As a user, I want to nurse activities raise request so that the related functionality works as expected.
-    Status: Draft
-    Priority: P1
+    Nurse Activities – Raise Request
+
+Description:
+
+As a nurse, I want to raise activity requests for my patients so that I can record, track, and ensure timely execution of required care tasks.
+
+Acceptance Criteria:
+
+Given a nurse with valid system access, when they navigate to the Activity Dashboard, then they see a “Create Request” button.
+
+Given the nurse clicks “Create Request”, when they fill in required fields (patient ID, activity type, priority, and notes) and submit, then a new activity request is saved and a confirmation message is displayed.
+
+Given an existing activity request, when the nurse selects it and chooses “Edit”, then they can modify any editable field and the changes are persisted after saving.
+
+Given a nurse views the list of their requests, when a request’s status changes to Completed by the system, then the status is updated in real time on the dashboard.
+
+Given invalid or missing required data, when the nurse attempts to submit the request, then the system shows appropriate validation error messages and prevents submission.
     `;
 
     // Step 2: Get hybrid search results for context

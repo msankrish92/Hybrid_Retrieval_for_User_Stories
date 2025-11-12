@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Story Validator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error {
+            background: #fee;
+            color: #c33;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #c33;
+        }
+
+        .success {
+            background: #efe;
+            color: #3c3;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #3c3;
+            margin-bottom: 20px;
+        }
+
+        .related-stories {
+            margin-top: 20px;
+        }
+
+        .story-card {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .story-card h4 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .story-card .meta {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 User Story Validator</h1>
+            <p>AI-powered validation and refinement using hybrid retrieval</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>📝 Input User Story</h2>
+
+                <div class="form-group">
+                    <label for="searchQuery">Search Query (Optional)</label>
+                    <input type="text" id="searchQuery" placeholder="e.g., nurse activities raise request">
+                </div>
+
+                <div class="form-group">
+                    <label for="userStory">User Story *</label>
+                    <textarea id="userStory" placeholder="Key: HC-NEW-001
+Summary: Nurse Activities Raise Request
+Description: As a user, I want to nurse activities raise request so that the related functionality works as expected.
+Status: Draft
+Priority: P1"></textarea>
+                </div>
+
+                <button class="btn" id="validateBtn" onclick="validateStory()">
+                    🚀 Validate Story
+                </button>
+            </div>
+
+            <div class="section">
+                <h2>✅ Validation Result</h2>
+                <div id="resultContainer">
+                    <p style="color: #999; text-align: center; padding: 40px;">
+                        Enter a user story and click "Validate Story" to see results
+                    </p>
+                </div>
+
+                <div id="relatedStories" class="related-stories" style="display: none;">
+                    <h3>📚 Related Stories</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function validateStory() {
+            const btn = document.getElementById('validateBtn');
+            const resultContainer = document.getElementById('resultContainer');
+            const relatedStoriesDiv = document.getElementById('relatedStories');
+            const userStory = document.getElementById('userStory').value;
+            const searchQuery = document.getElementById('searchQuery').value;
+
+            if (!userStory.trim()) {
+                resultContainer.innerHTML = '<div class="error">❌ Please enter a user story</div>';
+                return;
+            }
+
+            // Show loading
+            btn.disabled = true;
+            btn.textContent = '⏳ Validating...';
+            resultContainer.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing user story and retrieving related stories...</p>
+                </div>
+            `;
+            relatedStoriesDiv.style.display = 'none';
+
+            try {
+                const response = await fetch('http://localhost:3000/api/validate-story', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userStory: userStory,
+                        searchQuery: searchQuery || userStory
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Validation failed');
+                }
+
+                // Display validation result
+                resultContainer.innerHTML = `
+                    <div class="success">✅ Validation Complete</div>
+                    <div class="result">${escapeHtml(data.validation)}</div>
+                `;
+
+                // Display related stories
+                if (data.relatedStories && data.relatedStories.length > 0) {
+                    relatedStoriesDiv.style.display = 'block';
+                    relatedStoriesDiv.innerHTML = '<h3>📚 Related Stories</h3>' +
+                        data.relatedStories.map(story => `
+                            <div class="story-card">
+                                <h4>${story.key}: ${story.summary}</h4>
+                                <div class="meta">
+                                    Status: ${story.status?.name || 'Unknown'} | 
+                                    Score: ${story.hybridScore.toFixed(4)} | 
+                                    Found in: ${story.foundIn}
+                                </div>
+                            </div>
+                        `).join('');
+                }
+
+            } catch (error) {
+                resultContainer.innerHTML = `
+                    <div class="error">
+                        <strong>❌ Error:</strong> ${escapeHtml(error.message)}
+                    </div>
+                `;
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '🚀 Validate Story';
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Allow Enter to submit in search query
+        document.getElementById('searchQuery').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                validateStory();
+            }
+        });
+    </script>
+</body>
+
+</html>
