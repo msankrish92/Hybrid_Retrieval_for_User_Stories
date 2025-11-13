@@ -81,3 +81,6 @@ def test_user_story_validation():
 
 if __name__ == "__main__":
     test_user_story_validation()
+
+# from deepeval.metrics import FaithfulnessMetric
+# faithfulness = FaithfulnessMetric(model=model, threshold=0.7)
