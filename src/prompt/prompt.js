@@ -1,6 +1,5 @@
 export function formatPrompt(documentContext, newStory) {
-    return `
-## ICEPOT PROMPT — User Story Quality Validation & Refinement with Auto-Scoring
+   return `
 
 ### INSTRUCTION
 You are an expert Agile QA and story reviewer. Your job is to:
